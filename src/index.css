@@ -2,3 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Italic-VariableFont_opsz\wght.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background-color: #00adb4;
+  color: #f8f9f9;
+}
