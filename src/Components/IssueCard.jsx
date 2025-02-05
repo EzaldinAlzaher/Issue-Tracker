@@ -14,7 +14,7 @@ const IssueCard = () => {
         <h3 className="text-[20px] font-[700] text-tertiary">Title</h3>
         <hr className="border-none h-[0.5px] bg-tertiary my-[10px]" />
         {/* Desc of Issue */}
-        <p className="w-[290px] h-[112px] text-secondary text-[20px] font-[500] leading-[24px] overflow-x-scroll">
+        <p className="w-[290px] h-[112px] text-secondary text-[20px] font-[500] leading-[24px]">
           descriptiondescriptiondescripti descriptiondescriptiondescripti
           descriptiondescriptiondescripti descriptiondescriptiondescripti
         </p>
