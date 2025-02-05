@@ -1,4 +1,18 @@
+import { useState } from "react";
+
 export default function AddIssue() {
+  //
+  const [issueInfo, setIssueInfo] = useState({
+    title: "",
+    description: "",
+    imageUrl: "",
+    issueStatus: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setIssueInfo({ ...issueInfo, [name]: value });
+  };
   return (
     <div className="bg-secondary px-[24px] md:px-[30px] 2xl:px-[65px] 2xl:flex 2xl:flex-col 2xl:items-center">
       <div className="flex flex-col 2xl:w-[1406px] 2xl:bg-[#00ADB433] 2xl:rounded-[20px] 2xl:my-[130px]">
@@ -7,7 +21,7 @@ export default function AddIssue() {
           Add Issue
         </h1>
         {/* Inputs */}
-        <form action="">
+        <form>
           <div className="2xl:grid 2xl:grid-cols-2 2xl:grid-rows-2 2xl:pl-[140px]">
             {/* Input Title */}
             <div className="mb-[18px] 2xl:mb-[40px]">
@@ -22,6 +36,9 @@ export default function AddIssue() {
                 className="w-[100%] h-[50px] bg-secondary rounded-[5px] pl-[10px] border-[2px] border-solid border-primary text-[16px] mt-[10px] outline-none md:h-[60px] md:text-[22px] 2xl:w-[482px] 2xl:h-[70px] 2xl:text-[28px] 2xl:mt-[22px]"
                 type="text"
                 placeholder="Enter title"
+                name="title"
+                value={issueInfo.title}
+                onChange={handleChange}
               />
             </div>
             {/* Input Description */}
@@ -37,6 +54,9 @@ export default function AddIssue() {
                 className="w-[100%] h-[50px] bg-secondary rounded-[5px] pl-[10px] border-[2px] border-solid border-primary text-[16px] mt-[10px] outline-none md:h-[60px] md:text-[22px] 2xl:w-[482px] 2xl:h-[70px] 2xl:text-[28px] 2xl:mt-[22px]"
                 type="text"
                 placeholder="Enter description"
+                name="description"
+                value={issueInfo.description}
+                onChange={handleChange}
               />
             </div>
             {/* Input Image URL */}
@@ -52,6 +72,9 @@ export default function AddIssue() {
                 className="w-[100%] h-[50px] bg-secondary rounded-[5px] pl-[10px] border-[2px] border-solid border-primary text-[16px] mt-[10px] outline-none md:h-[60px] md:text-[22px] 2xl:w-[482px] 2xl:h-[70px] 2xl:text-[28px] 2xl:mt-[22px]"
                 type="text"
                 placeholder="Enter image URL"
+                name="imageUrl"
+                value={issueInfo.imageUrl}
+                onChange={handleChange}
               />
             </div>
             {/* Select Status */}
@@ -66,6 +89,8 @@ export default function AddIssue() {
               <select
                 name="status"
                 className="w-[100%] h-[50px] bg-secondary rounded-[5px] text-[16px] text-tertiary px-[10px] border-[2px] border-solid border-primary mt-[10px] outline-none md:h-[60px] md:text-[22px] 2xl:w-[482px] 2xl:h-[70px] 2xl:text-[28px] 2xl:mt-[22px]"
+                value={issueInfo.issueStatus}
+                onChange={handleChange}
               >
                 <option value="" disabled selected>
                   Choose a status
