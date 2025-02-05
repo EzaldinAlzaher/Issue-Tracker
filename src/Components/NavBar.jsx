@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <nav className="h-[70px] bg-primary flex justify-between items-center px-[15px]">
       <h1 className="text-tertiary text-[22px] font-[700]">Issue Tracker</h1>
-      <div className="relative z-10">
+      <div className="relative z-20">
         <svg
           onClick={handleIconClick}
           width="24"
