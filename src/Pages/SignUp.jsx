@@ -1,4 +1,47 @@
-export const SignUp = () => {
+import axios from "axios";
+import { useState } from "react";
+
+const SignUp = () => {
+  // State for Register Data
+  const [register, setRegister] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  // State for Errors
+  // const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRegister({ ...register, [name]: value });
+  };
+
+  // Handle Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (register.email && register.password) {
+      try {
+        const response = await axios.post(
+          "http://localhost:1337/api/auth/local/register",
+          register
+        );
+        localStorage.setItem("token", response.data.jwt);
+      } catch (er) {
+        console.error("There was an error registering!", er);
+      }
+    }
+
+    // reset form on Submit data
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setRegister({
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
   return (
     <div className="flex justify-center items-center">
       <div className="w-[375px] bg-secondary flex flex-col md:w-[768px] 2xl:w-[1536px] 2xl:flex-row ">
@@ -24,7 +67,8 @@ export const SignUp = () => {
           <h1 className="text-tertiary font-[800] text-[24px] text-center mt-[35px] md:text-[40px] 2xl:text-[48px]">
             Register
           </h1>
-          <form action="">
+          {/* Form data */}
+          <form onSubmit={handleSubmit}>
             {/* Input for Name */}
             <div className="mt-[65px] mb-[30px] 2xl:mt-[117px] 2xl:mb-[52px]">
               <label
@@ -38,6 +82,9 @@ export const SignUp = () => {
                 type="text"
                 placeholder="Enter your name"
                 className="w-[100%] h-[35px] border-0 border-b-[2px] border-primary bg-secondary text-[18px] outline-none pt-2 md:text-[24px] md:h-[40px] 2xl:text-[30px] 2xl:mt-[12px] 2xl:pb-[8px] 2xl:border-b-[3px]"
+                name="username"
+                value={register.username}
+                onChange={handleChange}
               />
             </div>
             {/* Input for Email */}
@@ -50,9 +97,13 @@ export const SignUp = () => {
               </label>
               <br />
               <input
+                required
                 type="email"
                 placeholder="Enter your email"
                 className="w-[100%] h-[35px] border-0 border-b-[2px] border-primary bg-secondary text-[18px] outline-none pt-2 md:text-[24px] md:h-[40px] 2xl:text-[30px] 2xl:mt-[12px] 2xl:pb-[8px] 2xl:border-b-[3px]"
+                name="email"
+                value={register.email}
+                onChange={handleChange}
               />
             </div>
             {/* Input for Password */}
@@ -65,9 +116,13 @@ export const SignUp = () => {
               </label>
               <br />
               <input
+                required
                 type="password"
                 placeholder="Enter your password"
                 className="w-[100%] h-[35px] border-0 border-b-[2px] border-primary bg-secondary text-[18px] outline-none pt-2 md:text-[24px] md:h-[40px] 2xl:text-[30px] 2xl:mt-[12px] 2xl:pb-[8px] 2xl:border-b-[3px]"
+                name="password"
+                value={register.password}
+                onChange={handleChange}
               />
             </div>
             {/* Input for Checkbox Remember */}
@@ -84,7 +139,10 @@ export const SignUp = () => {
               </label>
             </div>
             {/* Button */}
-            <button className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[36px] md:h-[60px] md:mb-[73px] md:text-[24px] 2xl:mt-[52px] 2xl:mb-[72px]">
+            <button
+              type="submit"
+              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[36px] md:h-[60px] md:mb-[73px] md:text-[24px] 2xl:mt-[52px] 2xl:mb-[72px]"
+            >
               Register
             </button>
             {/* Anchor Already Account */}
@@ -100,3 +158,5 @@ export const SignUp = () => {
     </div>
   );
 };
+
+export default SignUp;

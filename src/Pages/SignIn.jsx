@@ -1,4 +1,48 @@
+import axios from "axios";
+import { useState } from "react";
+
 export default function SignIn() {
+  // State for login data
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
+  };
+
+  // Handle Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (login.email && login.password) {
+      try {
+        const response = await axios.post(
+          "http://localhost:1337/api/auth/local",
+          {
+            identifier: login.email,
+            password: login.password,
+          }
+        );
+        // Add the token
+        localStorage.setItem("token", response.data.jwt);
+      } catch (er) {
+        console.error("There was an error registering!", er);
+      }
+    }
+
+    // reset form on Submit data
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setLogin({
+      email: "",
+      password: "",
+    });
+  };
   return (
     <div className="flex justify-center items-center">
       <div className="w-[375px] bg-secondary flex flex-col md:w-[768px] 2xl:w-[1536px] 2xl:flex-row">
@@ -22,7 +66,8 @@ export default function SignIn() {
           <h1 className="text-tertiary font-[800] text-[24px] text-center mt-[35px] md:text-[40px] 2xl:text-[48px]">
             Sign In
           </h1>
-          <form action="">
+          {/* Form data */}
+          <form onSubmit={handleSubmit}>
             {/* Input for Email */}
             <div className="mb-[30px] md:mt-[63px] md:mb-[40px] 2xl:mt-[137px]">
               <label
@@ -36,6 +81,9 @@ export default function SignIn() {
                 type="email"
                 placeholder="Enter your email"
                 className="w-[100%] h-[35px] border-0 border-b-[2px] border-primary bg-secondary text-[18px] outline-none pt-2 md:text-[24px] md:h-[40px] 2xl:text-[30px] 2xl:mt-[12px] 2xl:pb-[8px] 2xl:border-b-[3px]"
+                name="email"
+                value={login.email}
+                onChange={handleChange}
               />
             </div>
             {/* Input for Password */}
@@ -51,6 +99,9 @@ export default function SignIn() {
                 type="password"
                 placeholder="Enter your password"
                 className="w-[100%] h-[35px] border-0 border-b-[2px] border-primary bg-secondary text-[18px] outline-none pt-2 md:text-[24px] md:h-[40px] 2xl:text-[30px] 2xl:mt-[12px] 2xl:pb-[8px] 2xl:border-b-[3px]"
+                name="password"
+                value={login.password}
+                onChange={handleChange}
               />
             </div>
             {/* Forget Password */}
@@ -60,7 +111,10 @@ export default function SignIn() {
               </a>
             </p>
             {/* Button */}
-            <button className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[135px] md:h-[60px] md:text-[24px] md:mb-[210px] 2xl:mt-[58px] 2xl:mb-[252px]">
+            <button
+              type="submit"
+              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[135px] md:h-[60px] md:text-[24px] md:mb-[210px] 2xl:mt-[58px] 2xl:mb-[252px]"
+            >
               Sign In
             </button>
             {/* Anchor Register */}
