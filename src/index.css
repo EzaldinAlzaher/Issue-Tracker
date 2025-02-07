@@ -22,3 +22,20 @@
 body {
   background-color: #f8f9f9;
 }
+
+/* Width of Scroll */
+::-webkit-scrollbar {
+  width: 12px;
+}
+/* Background color of scroll */
+::-webkit-scrollbar-track {
+  background: #555;
+}
+/* color of scroll */
+::-webkit-scrollbar-thumb {
+  background: #00adb4;
+}
+/* hover of scroll */
+::-webkit-scrollbar-thumb:hover {
+  background: #f8f9f9;
+}

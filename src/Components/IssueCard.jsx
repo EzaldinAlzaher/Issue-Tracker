@@ -1,35 +1,34 @@
-const IssueCard = () => {
+import IsImage from "./IsImage";
+
+const IssueCard = ({ imageUrl, title, desc, statues, time, user, count }) => {
   return (
     <div className="w-[336px] h-[527px] rounded-[15px] border-[3px] border-solid border-primary m-[18px] relative">
       {/* Image */}
       <div>
-        <img
-          className="w-[330px] h-[180px]"
-          src="../../public/imageDe.png"
-          alt="Photo of issue"
-        />
+        <IsImage imageUrl={imageUrl} />
       </div>
       <div className="h-[357px] bg-primary rounded-[15px] px-[22px] pt-[25px] pb-[15px] absolute bottom-[-2px] left-[-2px]">
         {/* Name of Issue */}
-        <h3 className="text-[20px] font-[700] text-tertiary">Title</h3>
+        <h3 className="text-[20px] font-[700] text-tertiary">{title}</h3>
         <hr className="border-none h-[0.5px] bg-tertiary my-[10px]" />
         {/* Desc of Issue */}
         <p className="w-[290px] h-[112px] text-secondary text-[20px] font-[500] leading-[24px]">
-          descriptiondescriptiondescripti descriptiondescriptiondescripti
-          descriptiondescriptiondescripti descriptiondescriptiondescripti
+          {desc}
         </p>
         {/* Status of Issue */}
         <p className="text-[20px] text-secondary font-[500] mb-[15px]">
-          <strong className="text-tertiary font-[700]">Status: </strong>New
+          <strong className="text-tertiary font-[700]">Status: </strong>
+          {statues}
         </p>
         {/* Creation Time of Issue */}
         <p className="text-[20px] text-secondary font-[500]">
-          <strong className="text-tertiary font-[700]">Time: </strong>1:50pm
+          <strong className="text-tertiary font-[700]">Created at: </strong>
+          {new Date(time).toLocaleString()}
         </p>
         {/* User */}
         <p className="text-[20px] text-secondary font-[500] my-[15px]">
-          <strong className="text-tertiary font-[700]">User: </strong>Osama
-          Allaw
+          <strong className="text-tertiary font-[700]">Publisher: </strong>
+          {user}
         </p>
         {/* Buttons */}
         <div className="flex justify-between items-center mt-[30px]">
@@ -51,7 +50,7 @@ const IssueCard = () => {
               </svg>
             </button>
             {/* Count */}
-            <span>1</span>
+            <span>{count}</span>
             {/* Button Increment */}
             <button className="border-none bg-primary rounded-[100%] ml-2">
               <svg
