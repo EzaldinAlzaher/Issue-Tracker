@@ -7,12 +7,12 @@ export default function ActiveIssues() {
       <div className="flex justify-center">
         {/* Sorting by status */}
         <select className="w-[84px] h-[37px] bg-primary text-secondary rounded-[18px] font-[600] border-none px-[14px] py-[9px] gap-[7px] outline-none md:w-[120px] md:h-[45px] md:text-[24px] md:rounded-[180px] 2xl:w-[158px] 2xl:h-[65px] 2xl:px-[34px] 2xl:text-[32px]">
-          <option value="" selected disabled>
+          <option value="" defaultValue={true} disabled>
             Sort
           </option>
-          <option value="open">Open</option>
-          <option value="progress">In Progress</option>
-          <option value="closed">Closed</option>
+          <option value="Open">Open</option>
+          <option value="In-progress">In Progress</option>
+          <option value="Closed">Closed</option>
         </select>
         {/* Button add */}
         <button className="w-[115px] h-[37px] bg-primary text-secondary rounded-[18px] border-none flex justify-between items-center px-[14px] py-[9px] gap-[1px] ml-[6px] text-center text-[15px] font-[600] md:w-[165px] md:h-[45px] md:text-[24px] md:rounded-[180px] md:ml-[20px] 2xl:w-[244px] 2xl:h-[65px] 2xl:px-[34px] 2xl:text-[32px]">

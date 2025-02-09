@@ -1,6 +1,28 @@
+import axios from "axios";
 import IsImage from "./IsImage";
+import API from "../Services/API";
 
-const IssueCard = ({ imageUrl, title, desc, statues, time, user, count }) => {
+const IssueCard = ({
+  imageUrl,
+  title,
+  desc,
+  statues,
+  time,
+  user,
+  count,
+  documentId,
+}) => {
+  // Handle delete issue
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${API}/issues/${documentId}`);
+    } catch (error) {
+      console.log("There was an error deleting the issue!", error);
+    }
+  };
+
+  // Handle edit issue
+  const handleEdit = () => {};
   return (
     <div className="w-[336px] h-[527px] rounded-[15px] border-[3px] border-solid border-primary m-[18px] relative">
       {/* Image */}
@@ -75,7 +97,10 @@ const IssueCard = ({ imageUrl, title, desc, statues, time, user, count }) => {
               Edit
             </button>
             {/* Button of Delete */}
-            <button className="w-[82px] h-[30px] bg-secondary text-primary border-none rounded-[180px] pl-[6px] py-[6px] text-[16px] font-[500]">
+            <button
+              onClick={handleDelete}
+              className="w-[82px] h-[30px] bg-secondary text-primary border-none rounded-[180px] pl-[6px] py-[6px] text-[16px] font-[500]"
+            >
               Delete
             </button>
           </div>

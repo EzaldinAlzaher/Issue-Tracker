@@ -1,17 +1,15 @@
 import axios from "axios";
 import { useState } from "react";
-
+import API from "../Services/API";
 export default function AddIssue({ data }) {
   // State for Issue data
   const [issueInfo, setIssueInfo] = useState({
-    data: {
-      title: "",
-      description: "",
-      imageUrl: "",
-      counter: 1,
-      issueStatus: "",
-      username: "",
-    },
+    title: "",
+    description: "",
+    imageUrl: "",
+    counter: 1,
+    issueStatus: "",
+    username: "",
   });
 
   // Handle data on Change
@@ -26,10 +24,19 @@ export default function AddIssue({ data }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:1337/api/issues", {
-        data: issueInfo,
-      });
-      console.log(response.data);
+      const response = await axios.post(
+        `${API}/issues`,
+        (data = {
+          data: {
+            title: issueInfo.title,
+            description: issueInfo.description,
+            issueStatus: issueInfo.status,
+            imageUrl: issueInfo.imageUrl,
+            counter: issueInfo.counter,
+          },
+        })
+      );
+      console.log(response);
       resetForm();
     } catch (error) {
       console.log("There was an error submitting the issue!", error);
@@ -131,7 +138,7 @@ export default function AddIssue({ data }) {
                 onChange={handleChange}
                 value={issueInfo.issueStatus}
               >
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue={true}>
                   Choose a status
                 </option>
                 <option value="Open">Open</option>
