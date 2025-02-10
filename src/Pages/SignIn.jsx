@@ -113,7 +113,7 @@ export default function SignIn() {
             {/* Button */}
             <button
               type="submit"
-              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[135px] md:h-[60px] md:text-[24px] md:mb-[210px] 2xl:mt-[58px] 2xl:mb-[252px]"
+              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[135px] md:h-[60px] md:text-[24px] md:mb-[210px] 2xl:mt-[58px] 2xl:mb-[252px] st1-hover"
             >
               Sign In
             </button>

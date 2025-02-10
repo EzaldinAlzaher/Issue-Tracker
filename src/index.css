@@ -39,3 +39,42 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #f8f9f9;
 }
+
+button {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Buttons Hover */
+/* Style one */
+.st1-hover:hover {
+  background-color: #00adb4;
+  color: #f8f9f9;
+  border: 2px solid #f8f9f9;
+}
+/* Style two */
+.st2-hover:hover {
+  background-color: #f8f9f9;
+  color: #00adb4;
+  border: 2px solid #00adb4;
+}
+
+/* Buttons Active */
+/* Style one */
+.st1-active:active {
+  background-color: #f8f9f9;
+  color: #00adb4;
+  border: 2px solid #00adb4;
+}
+/* Style two */
+.st2-active:active {
+  background-color: #00adb4;
+  color: #f8f9f9;
+  border: 2px solid #f8f9f9;
+}
+
+/* Card Hover */
+.card-hover:hover {
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+}

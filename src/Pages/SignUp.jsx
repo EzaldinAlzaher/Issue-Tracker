@@ -141,7 +141,7 @@ const SignUp = () => {
             {/* Button */}
             <button
               type="submit"
-              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[36px] md:h-[60px] md:mb-[73px] md:text-[24px] 2xl:mt-[52px] 2xl:mb-[72px]"
+              className="w-[100%] h-[40px] font-[600] bg-primary rounded-[30px] p-[10px] gap[10px] border-none text-secondary mt-[41px] mb-[36px] md:h-[60px] md:mb-[73px] md:text-[24px] 2xl:mt-[52px] 2xl:mb-[72px] st2-hover"
             >
               Register
             </button>
