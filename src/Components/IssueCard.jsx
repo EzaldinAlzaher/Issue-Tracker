@@ -3,6 +3,7 @@ import IsImage from "./IsImage";
 import API from "../Services/API";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import DeleteIssue from "./DeleteIssue";
 const IssueCard = ({
   imageUrl,
   title,
@@ -13,30 +14,9 @@ const IssueCard = ({
   count,
   documentId,
 }) => {
-  // Message on delete issue
-  const [message, setMessage] = useState("");
-
-  // Handle delete issue
-  const handleDelete = async () => {
-    try {
-      const res = await axios.delete(`${API}/issues/${documentId}`);
-      console.log(res);
-      setMessage("Issue deleted successfully!");
-    } catch (error) {
-      console.log("There was an error deleting the issue!", error);
-      setMessage("There was an error deleting the issue!");
-    }
-  };
-
   // Handle edit issue
   // const handleEdit = () => {};
 
-  // Close modal
-  const closeModal = () => {
-    console.log("tt");
-
-    setMessage("");
-  };
   return (
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
       <div className="w-[336px] h-[527px] rounded-[15px] border-[3px] border-solid border-primary m-[18px] relative card-hover">
@@ -112,31 +92,11 @@ const IssueCard = ({
                 Edit
               </button>
               {/* Button of Delete */}
-              <button
-                onClick={handleDelete}
-                className="w-[82px] h-[30px] bg-secondary text-primary border-none rounded-[180px] pl-[6px] py-[6px] text-[16px] font-[500] st1-hover st1-active"
-              >
-                Delete
-              </button>
+              <DeleteIssue documentId={documentId} />
             </div>
           </div>
         </div>
       </div>
-      {/* Show message modal on delete issue */}
-      {message && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Message</h2>
-            <p>{message}</p>
-            <button
-              onClick={closeModal}
-              className="mt-4 bg-primary text-secondary py-2 px-4 rounded border-none st2-hover st2-active"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </motion.div>
   );
 };

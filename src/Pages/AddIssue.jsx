@@ -6,7 +6,7 @@ export default function AddIssue({ data }) {
   const [issueInfo, setIssueInfo] = useState({
     title: "",
     description: "",
-    imageUrl: "",
+    imageUrl: "string",
     counter: 1,
     issueStatus: "",
     username: "",
@@ -55,7 +55,7 @@ export default function AddIssue({ data }) {
     setIssueInfo({
       title: "",
       description: "",
-      imageUrl: "",
+      imageUrl: "string",
       counter: 1,
       issueStatus: "",
       username: "",
