@@ -6,7 +6,8 @@ export default function DeleteIssue({ documentId }) {
   // Message on delete issue
   const [message, setMessage] = useState("");
 
-  const handleDelete = async () => {
+  const handleDelete = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.delete(`${API}/issues/${documentId}`);
       console.log(res);
@@ -32,8 +33,8 @@ export default function DeleteIssue({ documentId }) {
       </button>
       {/* Show message modal on delete issue */}
       {message && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-tertiary bg-opacity-50">
+          <div className="bg-secondary p-6 rounded shadow-lg">
             <h2 className="text-xl font-bold mb-4">Message</h2>
             <p>{message}</p>
             <button

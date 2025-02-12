@@ -9,7 +9,7 @@ export default function AddIssue({ data }) {
     imageUrl: "string",
     counter: 1,
     issueStatus: "",
-    username: "",
+    username: "Ezaldin Alzaher",
   });
 
   // State for modal message
@@ -24,29 +24,34 @@ export default function AddIssue({ data }) {
   // Handle data On Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `${API}/issues`,
-        (data = {
-          data: {
-            title: issueInfo.title,
-            description: issueInfo.description,
-            issueStatus: issueInfo.status,
-            imageUrl: issueInfo.imageUrl,
-            counter: issueInfo.counter,
-          },
-        })
-      );
-      console.log(response);
-      setMessage("Issue saved successfully!");
-      resetForm();
-    } catch (error) {
-      console.log("There was an error submitting the issue!", error);
-      setMessage("There was an error submitting the issue!");
-    } finally {
-      // reset form on Submit data
-      resetForm();
+    // if
+    if (issueInfo.title.trim() == "" || issueInfo.description.trim() == "") {
+      setMessage("Please fill all the fields!");
+    } else {
+      try {
+        const response = await axios.post(
+          `${API}/issues`,
+          (data = {
+            data: {
+              title: issueInfo.title,
+              description: issueInfo.description,
+              issueStatus: issueInfo.issueStatus,
+              imageUrl: issueInfo.imageUrl,
+              counter: issueInfo.counter,
+              username: issueInfo.username,
+            },
+          })
+        );
+        console.log(response);
+        setMessage("Issue saved successfully!");
+        resetForm();
+      } catch (error) {
+        console.log("There was an error submitting the issue!", error);
+        setMessage("There was an error submitting the issue!");
+      } finally {
+        // reset form on Submit data
+        resetForm();
+      }
     }
   };
 
@@ -58,7 +63,7 @@ export default function AddIssue({ data }) {
       imageUrl: "string",
       counter: 1,
       issueStatus: "",
-      username: "",
+      username: "Ezaldin Alzaher",
     });
   };
 
@@ -141,12 +146,12 @@ export default function AddIssue({ data }) {
               </label>
               <br />
               <select
-                name="status"
+                name="issueStatus"
                 className="w-[100%] h-[50px] bg-secondary rounded-[5px] text-[16px] text-tertiary px-[10px] border-[2px] border-solid border-primary mt-[10px] outline-none md:h-[60px] md:text-[22px] 2xl:w-[482px] 2xl:h-[70px] 2xl:text-[28px] 2xl:mt-[22px]"
                 onChange={handleChange}
                 value={issueInfo.issueStatus}
               >
-                <option value="" disabled>
+                <option value="" disabled selected>
                   Choose a status
                 </option>
                 <option value="Open">Open</option>
@@ -168,8 +173,8 @@ export default function AddIssue({ data }) {
       </div>
       {/* Show message modal on save */}
       {message && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-tertiary bg-opacity-50">
+          <div className="bg-secondary p-6 rounded shadow-lg">
             <h2 className="text-xl font-bold mb-4">Message</h2>
             <p>{message}</p>
             <button

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import IssueCard from "./IssueCard";
 import axios from "axios";
 import API from "../Services/API";
+import SkeletonCard from "./SkeletonCard";
 export default function ShwoIssues() {
   // State for storage Issues data
   const [dataIssues, setDataIssues] = useState([]);
@@ -19,7 +20,11 @@ export default function ShwoIssues() {
     fetchData();
   }, [dataIssues]);
   return (
-    <div className="grid grid-cols-1 grid-rows-1 justify-items-center items-center md:p-[34px] md:grid-cols-2 md:grid-rows-2 2xl:grid-cols-4 2xl:grid-rows-4 2xl:p-[50px]">
+    <div className="grid grid-cols-1 grid-rows-1 h-auto justify-items-center items-center md:p-[34px] md:grid-cols-2 md:grid-rows-2 2xl:grid-cols-4 2xl:grid-rows-4 2xl:p-[50px]">
+      {/* Skeleton */}
+      {dataIssues.length == 0 &&
+        [1, 2, 3, 4].map((_, idx) => <SkeletonCard key={idx} />)}
+      {/* Show Cards */}
       {dataIssues.map((item, idx) => (
         <IssueCard
           key={idx}

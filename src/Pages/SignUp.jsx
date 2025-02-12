@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   // State for Register Data
@@ -8,9 +9,13 @@ const SignUp = () => {
     email: "",
     password: "",
   });
-  // State for Errors
-  // const [error, setError] = useState("");
 
+  // Navigate to Different Routes
+  const navigate = useNavigate();
+  // State Modal
+  const [message, setMessage] = useState("");
+
+  // Handle data on Change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister({ ...register, [name]: value });
@@ -19,16 +24,23 @@ const SignUp = () => {
   // Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (register.email && register.password) {
+    if (register.email && register.password.length >= 8) {
       try {
         const response = await axios.post(
           "http://localhost:1337/api/auth/local/register",
           register
         );
         localStorage.setItem("token", response.data.jwt);
+        setMessage("Registration successful!");
+        if (response.status === 200 && !message) navigate("/");
       } catch (er) {
         console.error("There was an error registering!", er);
+        setMessage("There was an error registering!");
       }
+    } else {
+      setMessage(
+        "Please enter a valid email and password (at least 8 characters)."
+      );
     }
 
     // reset form on Submit data
@@ -41,6 +53,10 @@ const SignUp = () => {
       email: "",
       password: "",
     });
+  };
+  // Close a Modal
+  const closeModal = () => {
+    setMessage("");
   };
   return (
     <div className="flex justify-center items-center">
@@ -148,13 +164,27 @@ const SignUp = () => {
             {/* Anchor Already Account */}
             <p className="text-tertiary text-[12px] font-[500] text-center md:text-[20px] 2xl:text-[24px]">
               Already Registered ?{" "}
-              <a href="" className="text-primary decoration-none">
+              <Link to={"/signIn"} className="text-primary decoration-none">
                 Log In
-              </a>
+              </Link>
             </p>
           </form>
         </div>
       </div>
+      {message && (
+        <div className="fixed inset-0 flex items-center justify-center bg-tertiary bg-opacity-50">
+          <div className="bg-secondary p-6 rounded shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Message</h2>
+            <p>{message}</p>
+            <button
+              onClick={closeModal}
+              className="mt-4 bg-primary text-secondary py-2 px-4 rounded border-none st2-hover"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

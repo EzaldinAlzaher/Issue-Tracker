@@ -1,24 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
-import ErrorElement from "./Components/ErrorElement.jsx";
-import AuthRoute from "./Components/AuthRoute.jsx";
-import Home from "./Pages/Home.jsx";
-import AddIssue from "./Pages/AddIssue.jsx";
-import EditIssue from "./Pages/EditIssue.jsx";
-import SignUp from "./Pages/SignUp.jsx";
-import SignIn from "./Pages/SignIn.jsx";
+import Home from "../src/Pages/Home";
+import SignIn from "../src/Pages/SignIn";
+import SignUp from "../src/Pages/SignUp";
+import AddIssue from "../src/Pages/AddIssue";
+import EditIssue from "../src/Pages/EditIssue";
+import NotFoundPage from "../src/Pages/NotFoundPage";
+import AuthRoute from "./AuthRoute";
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <ErrorElement />,
     element: <AuthRoute />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/add", element: <AddIssue /> },
-      { path: "/edit", element: <EditIssue /> },
+      { path: "/addIssue", element: <AddIssue /> },
+      { path: "/editIssue", element: <EditIssue /> },
     ],
   },
-  { path: "/signup", element: <SignUp /> },
-  { path: "/signin", element: <SignIn /> },
+  { path: "/signIn", element: <SignIn /> },
+  { path: "/signUp", element: <SignUp /> },
+  { path: "*", element: <NotFoundPage /> },
 ]);
 
 export default router;

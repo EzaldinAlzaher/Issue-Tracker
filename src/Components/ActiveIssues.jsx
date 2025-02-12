@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ActiveIssues() {
+  const navigate = useNavigate();
   return (
     <div className="h-[57px] bg-[#CCEFF0] p-[10px] flex justify-between items-center sticky top-0 z-10 md:h-[85px] md:p-[20px] 2xl:h-[115px] 2xl:p-[30px]">
       <h2 className="text-tertiary text-[20px] font-[700] md:text-[36px] 2xl:text-[40px]">
-        My Issues
+        Issues
       </h2>
       <div className="flex justify-center">
         {/* Sorting by status */}
@@ -15,7 +18,10 @@ export default function ActiveIssues() {
           <option value="Closed">Closed</option>
         </select>
         {/* Button add */}
-        <button className="w-[115px] h-[37px] bg-primary text-secondary rounded-[18px] border-none flex justify-between items-center px-[14px] py-[9px] gap-[1px] ml-[6px] text-center text-[15px] font-[600] md:w-[165px] md:h-[45px] md:text-[24px] md:rounded-[180px] md:ml-[20px] 2xl:w-[244px] 2xl:h-[65px] 2xl:px-[34px] 2xl:text-[32px] st2-hover st2-active">
+        <button
+          onClick={() => navigate("/addIssue")}
+          className="w-[115px] h-[37px] bg-primary text-secondary rounded-[18px] border-none flex justify-between items-center px-[14px] py-[9px] gap-[1px] ml-[6px] text-center text-[13px] font-[600] md:w-[165px] md:h-[45px] md:text-[24px] md:rounded-[180px] md:ml-[20px] 2xl:w-[244px] 2xl:h-[65px] 2xl:px-[34px] 2xl:text-[32px] st2-hover st2-active"
+        >
           <svg
             className="md:w-[14px] md:h-[14px] 2xl:w-[22px] 2xl:h-[22px]"
             width="12"
